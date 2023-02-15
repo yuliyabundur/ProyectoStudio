@@ -1,12 +1,20 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from AppBeautyStudio.models import Especialistas
+#from AppBeautyStudio.models import Especialistas
 
 # Create your views here.
-def especialistas(request):
-    especialista = Especialistas(nombre='Anastasiya', apellidos='Gonzalez', profesion='cejas')
-    especialista.save()
-    respuesta = f'Nombre: {especialista.nombre}, Apellido: {especialista.apellidos}, Especialista: {especialista.profesion}, '
+def inicio(request):
+    return HttpResponse('Vista inicio')
 
-    return HttpResponse(respuesta)
+def especialistas(request):
+    return HttpResponse('Vista especialistas')
+
+def servicios(request):
+    return HttpResponse('Vista servicios')
+
+def clientes(request):
+    return HttpResponse('Vista clientes')
+
+def pedir_cita(request):
+    return HttpResponse('Vista Pedir cita')
