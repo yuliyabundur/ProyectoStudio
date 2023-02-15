@@ -5,16 +5,16 @@ from django.http import HttpResponse
 
 # Create your views here.
 def inicio(request):
-    return HttpResponse('Vista inicio')
+    return render(request,'AppBeautyStudio/Inicio.html')
 
 def especialistas(request):
-    return HttpResponse('Vista especialistas')
+    return render(request,'AppBeautyStudio/Especialistas.html')
 
 def servicios(request):
-    return HttpResponse('Vista servicios')
+    return render(request,'AppBeautyStudio/Servicios.html')
 
 def clientes(request):
-    return HttpResponse('Vista clientes')
+    return render(request,'AppBeautyStudio/Clientes.html')
 
 def pedir_cita(request):
-    return HttpResponse('Vista Pedir cita')
+    return render(request,'AppBeautyStudio/Pedir Cita.html')
