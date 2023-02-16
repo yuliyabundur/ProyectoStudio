@@ -3,9 +3,9 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('', inicio),
-    path('especialistas/', especialistas),
-    path('servicios/', servicios),
-    path('clientes/', clientes),
-    path('pedir-Cita/', pedir_cita),
+    path('', inicio, name='inicio'),
+    path('especialistas/', especialistas, name='especialistas'),
+    path('servicios/', servicios, name='servicios'),
+    path('clientes/', clientes, name='clientes'),
+    path('pedir-cita/', pedir_cita, name='pedir cita'),
 ]
