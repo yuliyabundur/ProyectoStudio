@@ -17,4 +17,4 @@ def clientes(request):
     return render(request,'AppBeautyStudio/Clientes.html')
 
 def pedir_cita(request):
-    return render(request,'AppBeautyStudio/Pedir Cita.html')
+    return render(request,'AppBeautyStudio/Pedir_Cita.html')
