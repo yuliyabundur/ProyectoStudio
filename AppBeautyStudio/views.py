@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+
+from .models import Especialista
 
 
 #from AppBeautyStudio.models import Especialistas
@@ -19,5 +21,11 @@ def clientes(request):
 def pedir_cita(request):
     return render(request,'AppBeautyStudio/Pedir_Cita.html')
 
-def especialistas_formulario (request):
-    return render(request, 'AppBeautyStudio/especialistas-formulario.html')
+def especialistas_formulario(request):
+
+    if request.method == 'POST':
+        nuevo_especialista = Especialista(nombre=request.POST['nombre'], apellidos=request.POST['apellidos'], profesion=request.POST['profesion'])
+        nuevo_especialista.save()
+        return render(request, 'AppBeautyStudio/Inicio.html')
+
+    return render(request, 'AppBeautyStudio/Especialistas-formulario.html')

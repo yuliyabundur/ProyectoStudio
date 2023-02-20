@@ -9,12 +9,13 @@ Formulario - Agregar Especialistas
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <form action="{% url 'especialistas-formulario' %}" method="post"></form>
+                <form action="{% url 'especialistas-formulario' %}" method="POST">
                 {% csrf_token %}
                 <p>Nombre: <input type="text" name= "nombre"></p>
                 <p>Apellidos: <input type="text" name= "apellidos"></p>
                 <p>Servicio: <input type="text" name= "profesion"></p>
                 <input type="submit" value="Enviar">
+            </form>
             </div>
         </div>
     </div>
