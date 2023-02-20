@@ -26,6 +26,6 @@ def especialistas_formulario(request):
     if request.method == 'POST':
         nuevo_especialista = Especialista(nombre=request.POST['nombre'], apellidos=request.POST['apellidos'], profesion=request.POST['profesion'])
         nuevo_especialista.save()
-        return render(request, 'AppBeautyStudio/Inicio.html')
+        return redirect('especialistas-formulario')
 
     return render(request, 'AppBeautyStudio/Especialistas-formulario.html')
