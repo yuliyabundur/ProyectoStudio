@@ -18,3 +18,6 @@ def clientes(request):
 
 def pedir_cita(request):
     return render(request,'AppBeautyStudio/Pedir_Cita.html')
+
+def especialistas_formulario (request):
+    return render(request, 'AppBeautyStudio/especialistas-formulario.html')
