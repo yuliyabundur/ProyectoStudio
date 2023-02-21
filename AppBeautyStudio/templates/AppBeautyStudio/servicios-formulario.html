@@ -1,7 +1,7 @@
 {% extends 'AppBeautyStudio/padre.html' %}
 
 {% block titulo %}
-Formulario - Agregar Especialistas 
+Formulario - Agregar Servicio 
 {% endblock titulo %}
 
 {% block contenido %}
@@ -9,14 +9,13 @@ Formulario - Agregar Especialistas
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <form action="{% url 'especialistas-formulario' %}" method="POST">
+                <form action="{% url 'servicios-formulario' %}" method="POST">
                 {% csrf_token %}
-                <!--<p>Nombre: <input type="text" name= "nombre"></p>
-                <p>Apellidos: <input type="text" name= "apellidos"></p>
-                <p>Servicio: <input type="text" name= "profesion"></p>
+                <!--<p>Servicio: <input type="text" name= "servicio"></p>
+                <p>Precio: <input type="text" name= "precio"></p>
                 <input type="submit" value="Enviar"> -->
                 <table>
-                {{ formulario_especialistas.as_table }}
+                {{ formulario_servicios.as_table }}
                 </table>
                 <input type="submit" value="Enviar">
             </form>
