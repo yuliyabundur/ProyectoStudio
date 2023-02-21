@@ -35,6 +35,6 @@ class Cita(models.Model):
     reservado = models.BooleanField()
 
     def __str__(self):
-        return self.apellidos_especialista
+        return self.fecha_cita
     
    

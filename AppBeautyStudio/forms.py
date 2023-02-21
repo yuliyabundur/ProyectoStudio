@@ -14,3 +14,8 @@ class ClienteFormulario(forms.Form):
     apellidos = forms.CharField()
     telefono = forms.IntegerField()
     email = forms.EmailField()
+
+class CitaFormulario(forms.Form):
+    apellidos_especialista = forms.CharField()
+    fecha_cita = forms.DateField()
+    reservado = forms.BooleanField(required=False, initial=True)

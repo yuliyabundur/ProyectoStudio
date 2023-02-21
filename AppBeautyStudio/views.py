@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
-from .models import Especialista, Servicio, Cliente
-from .forms import EspecialistaFormulario, ServicioFormulario, ClienteFormulario
+from .models import Especialista, Servicio, Cliente, Cita
+from .forms import EspecialistaFormulario, ServicioFormulario, ClienteFormulario, CitaFormulario
 
 
 #from AppBeautyStudio.models import Especialistas
@@ -24,12 +24,21 @@ def pedir_cita(request):
 
 def especialistas_formulario(request):
 
-    if request.method == 'POST':
-        nuevo_especialista = Especialista(nombre=request.POST['nombre'], apellidos=request.POST['apellidos'], profesion=request.POST['profesion'])
-        nuevo_especialista.save()
-        return redirect('especialistas-formulario')
+    #if request.method == 'POST':
+    #    nuevo_especialista = Especialista(nombre=request.POST['nombre'], apellidos=request.POST['apellidos'], profesion=request.POST['profesion'])
+    #   nuevo_especialista.save()
+    #   return redirect('especialistas-formulario')
 
-    mi_formulario = EspecialistaFormulario ()
+    if request.method == 'POST':
+        mi_formulario = EspecialistaFormulario(request.POST)
+
+        if mi_formulario.is_valid():
+            informacion = mi_formulario.cleaned_data
+            nuevo_especialista = Especialista(nombre=informacion['nombre'], apellidos=informacion['apellidos'], profesion=informacion['profesion'])
+            nuevo_especialista.save()
+            return redirect('especialistas-formulario')
+      
+    mi_formulario = EspecialistaFormulario 
     return render(request, 'AppBeautyStudio/Especialistas-formulario.html',{'formulario_especialistas': mi_formulario})
 
 def servicios_formulario(request):
@@ -51,4 +60,14 @@ def clientes_formulario(request):
 
     mi_formulario = ClienteFormulario ()
     return render(request, 'AppBeautyStudio/Clientes-formulario.html',{'formulario_clientes': mi_formulario})
+
+def citas_formulario(request):
+
+    if request.method == 'POST':
+        nueva_cita = Cita(apellidos_especialista=request.POST['apellidos_especialista'], fecha_cita=request.POST['fecha_cita'], reservado=request.POST['reservado'])
+        nueva_cita.save()
+        return redirect('clientes-formulario')
+
+    mi_formulario = CitaFormulario ()
+    return render(request, 'AppBeautyStudio/Citas-formulario.html',{'formulario_citas': mi_formulario})
 

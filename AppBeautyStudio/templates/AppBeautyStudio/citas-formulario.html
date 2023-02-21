@@ -1,0 +1,26 @@
+{% extends 'AppBeautyStudio/padre.html' %}
+
+{% block titulo %}
+Formulario - Pedir Cita 
+{% endblock titulo %}
+
+{% block contenido %}
+<section class="features-icons bg-light text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <form action="{% url 'pedir-cita-formulario' %}" method="POST">
+                {% csrf_token %}
+                <!--<p>Apellidos especialista: <input type="text" name= "apellidos_especialista"></p>
+                <p>Fecha cita: <input type="text" name= "fecha_cita"></p>
+                <input type="submit" value="Enviar"> -->
+                <table>
+                {{ formulario_citas.as_table }}
+                </table>
+                <input type="submit" value="Enviar">
+            </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock contenido %}
