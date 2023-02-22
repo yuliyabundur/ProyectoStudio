@@ -103,7 +103,13 @@ def busqueda_especialista(request):
     return render(request,'AppBeautyStudio/busqueda-especialista.html')
 
 def buscar(request):
-    respuesta = f'Estoy buscando tu especialista: {request.GET["apellidos"]}'
+    
+    if request.GET['apellidos']:
+        mi_especialista = request.GET['apellidos']
+        resultado = Especialista.objects.filter(apellidos__icontains = mi_especialista)
 
+        return render(request, 'AppBeautyStudio/resultados-busqueda.html', {'especialistas': resultado, 'especialista': mi_especialista})
+
+    respuesta = 'No se encontró este especialista'
     return HttpResponse(respuesta)
 
