@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 
 from .models import Especialista, Servicio, Cliente, Cita
 from .forms import EspecialistaFormulario, ServicioFormulario, ClienteFormulario, CitaFormulario
@@ -97,4 +98,12 @@ def citas_formulario(request):
 
     mi_formulario = CitaFormulario ()
     return render(request, 'AppBeautyStudio/citas-formulario.html',{'formulario_citas': mi_formulario})
+
+def busqueda_especialista(request):
+    return render(request,'AppBeautyStudio/busqueda-especialista.html')
+
+def buscar(request):
+    respuesta = f'Estoy buscando tu especialista: {request.GET["apellidos"]}'
+
+    return HttpResponse(respuesta)
 

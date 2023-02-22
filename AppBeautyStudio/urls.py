@@ -12,4 +12,6 @@ urlpatterns = [
     path('servicios-formulario/', servicios_formulario, name='servicios-formulario'),
     path('clientes-formulario/', clientes_formulario, name='clientes-formulario'),
     path('pedir-cita-formulario/', citas_formulario, name='pedir-cita-formulario'),
+    path('busqueda-especialista/', busqueda_especialista, name='busqueda-especialista'),
+    path('buscar/', buscar, name='buscar'),
 ]
