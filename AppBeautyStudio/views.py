@@ -23,8 +23,10 @@ def especialistas(request):
             especialista = Especialista(nombre=informacion['nombre'], apellidos=informacion['apellidos'], profesion=informacion['profesion'])
             especialista.save()
 
+            nuevo_formulario = EspecialistaFormulario()
+            
             nuevo_especialista = {'nombre':informacion['nombre'], 'apellidos':informacion['apellidos'], 'profesion':informacion['profesion']}
-            return render(request, 'AppBeautyStudio/Especialistas.html',{'formulario_especialistas':mi_formulario, 
+            return render(request, 'AppBeautyStudio/Especialistas.html',{'formulario_especialistas':nuevo_formulario, 
             'nuevo_especialista':nuevo_especialista,
             'mis_especialistas':mis_especialistas})
 
