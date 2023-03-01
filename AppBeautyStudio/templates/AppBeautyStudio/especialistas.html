@@ -25,18 +25,13 @@
 
                 <form action="{% url 'especialistas' %}" method="POST">
                 {% csrf_token %}
-
                     <table>
                         {{ formulario_especialistas.as_table }}
                     </table>
                     <br>
                     <input type="submit" value="Agregar Especialista">
                     <hr>
-
                 </form>
-
-                <br>
-                <br>
 
                 <head>
                     <meta charset="UTF-12">
@@ -50,6 +45,31 @@
                         <input type="text" name="apellidos" id="especialista">
                         <input type="submit" value="Buscar">
                     </form>
+                </body>
+                <hr>
+
+                <head>
+                    <meta charset="UTF-12">
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+                    <title>Resultados de la búsqueda</title>
+                </head>
+                <body>
+    
+                    {% if especialistas %}
+
+                    <p>Estamos buscando especialista: {{ especialista }}</p>
+                
+                    <ul>
+                    {% for especialista in especialistas %}
+                        <li> {{ especialista.apellidos }} : {{ especialista.profesion }} </li>
+                    {% endfor %}
+                    </ul>
+                
+                    {% else %}
+                    <p style="color: firebrick;">No hay datos...</p>
+                
+                    {% endif %}
                 </body>
 
             </div>
