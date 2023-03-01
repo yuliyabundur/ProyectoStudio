@@ -29,10 +29,29 @@
                     <table>
                         {{ formulario_especialistas.as_table }}
                     </table>
-
+                    <br>
                     <input type="submit" value="Agregar Especialista">
+                    <hr>
 
                 </form>
+
+                <br>
+                <br>
+
+                <head>
+                    <meta charset="UTF-12">
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+                    <title>Búsqueda</title>
+                </head>
+                <body>
+                    <form action="{% url 'buscar' %}" method="GET">
+                        {% csrf_token %}
+                        <input type="text" name="apellidos" id="especialista">
+                        <input type="submit" value="Buscar">
+                    </form>
+                </body>
+
             </div>
         </div>
     </div>
