@@ -12,7 +12,26 @@ def inicio(request):
     return render(request,'AppBeautyStudio/Inicio.html')
 
 def especialistas(request):
-    return render(request,'AppBeautyStudio/Especialistas.html')
+    #return render(request,'AppBeautyStudio/Especialistas.html')
+    mis_especialistas = Especialista.objects.all()
+
+    if request.method == 'POST':
+        mi_formulario = EspecialistaFormulario(request.POST)
+
+        if mi_formulario.is_valid():
+            informacion = mi_formulario.cleaned_data
+            especialista = Especialista(nombre=informacion['nombre'], apellidos=informacion['apellidos'], profesion=informacion['profesion'])
+            especialista.save()
+
+            nuevo_especialista = {'nombre':informacion['nombre'], 'apellidos':informacion['apellidos'], 'profesion':informacion['profesion']}
+            return render(request, 'AppBeautyStudio/Especialistas.html',{'formulario_especialistas':mi_formulario, 
+            'nuevo_especialista':nuevo_especialista,
+            'mis_especialistas':mis_especialistas})
+
+    else: 
+        mi_formulario = EspecialistaFormulario()
+
+    return render(request, 'AppBeautyStudio/Especialistas.html', {'formulario_especialistas':mi_formulario, 'mis_especialistas':mis_especialistas})
 
 def servicios(request):
     return render(request,'AppBeautyStudio/Servicios.html')
