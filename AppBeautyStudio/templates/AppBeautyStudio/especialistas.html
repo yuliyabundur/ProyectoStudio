@@ -47,30 +47,39 @@
                     </form>
                 </body>
                 <hr>
-
+            
                 <head>
                     <meta charset="UTF-12">
                     <meta http-equiv="X-UA-Compatible" content="IE=edge">
                     <meta name="viewport" content="width=device-width,initial-scale=1.0">
                     <title>Resultados de la búsqueda</title>
                 </head>
-                <body>
-    
+                 <body>
                     {% if especialistas %}
 
                     <p>Estamos buscando especialista: {{ especialista }}</p>
-                
+    
                     <ul>
                     {% for especialista in especialistas %}
-                        <li> {{ especialista.apellidos }} : {{ especialista.profesion }} </li>
+                    <li> {{ especialista.apellidos }} : {{ especialista.profesion }} </li>
+
                     {% endfor %}
                     </ul>
-                
+    
                     {% else %}
+
+                    <ul>
+                    <ul>
+                    <ul>
+                    <ul>
                     <p style="color: firebrick;">No hay datos...</p>
-                
+                    </ul>
+                    </ul>
+                    </ul>
+                    </ul>
+
                     {% endif %}
-                </body>
+                    </body>
 
             </div>
         </div>
