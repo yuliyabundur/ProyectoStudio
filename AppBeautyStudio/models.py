@@ -8,7 +8,7 @@ class Especialista(models.Model):
     profesion = models.CharField(max_length=30)
 
     def __str__(self):
-        return self.nombre
+        return self.nombre +' '+ self.apellidos
 
 class Cliente(models.Model):
 

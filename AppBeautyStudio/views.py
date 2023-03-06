@@ -135,3 +135,8 @@ def buscar(request):
         respuesta = 'No se encontró este especialista'
     return HttpResponse(respuesta)
 
+def leer_servicios(request):
+    servicios = Servicio.objects.all() #trae todos los servicios
+    contexto = {'servicios': servicios}
+    return render(request, 'AppBeautyStudio/leer-servicios.html', contexto)
+
