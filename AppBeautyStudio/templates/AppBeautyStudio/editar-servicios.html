@@ -9,13 +9,20 @@
                 <p>
                     <ul>
                         {% for servicio in servicios %}
-                            <li>{{ servicio }} - <button><a href="{% url 'eliminar-servicios' servicio.id %}">Eliminar</a> <a href="{% url 'editar-servicios' servicio.id %}">Editar</a></button>
+                            <li>{{ servicio }} - <a href="{% url 'eliminar-servicios' servicio.id %}">Eliminar</a>   <a href="{% url 'editar-servicios' servicio.id %}">Editar</a>
                             </li>
                         {% endfor %}
                     </ul>
 
                 </p>
-        
+                {% if mi_formulario %}
+                <hr>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{ mi_formulario.as_p }}
+                    <input type="submit" value="Guardar cambios">
+                </form>
+                {% endif %}
                 <h1>Agregar servicio</h1>
                     <button>
                     <a href="{% url 'servicios-formulario' %}">Agregar servicio</a>

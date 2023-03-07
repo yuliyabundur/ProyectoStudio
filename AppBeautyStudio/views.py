@@ -140,3 +140,48 @@ def leer_servicios(request):
     contexto = {'servicios': servicios}
     return render(request, 'AppBeautyStudio/leer-servicios.html', contexto)
 
+def eliminar_servicio(request, servicio_id):
+    servicio= Servicio.objects.get(id=servicio_id)
+    servicio.delete()
+
+    #vuelvo al menu
+    servicios = Servicio.objects.all() #trae todos los servicios
+
+    contexto= {'servicios':servicios}
+
+    return render(request, 'AppBeautyStudio/leer-servicios.html', contexto)
+
+def editar_servicio(request, servicio_id):
+    servicio= Servicio.objects.get(id=servicio_id)
+
+    #si es metodo POST hago lo mismo que el agregar
+
+    if request.method =='POST':
+
+        mi_formulario =ServicioFormulario(request.POST)  #aqui me llega toda la info del html
+
+        print(mi_formulario)
+
+        if mi_formulario.is_valid: #si paso la validacion de Django
+
+            informacion = mi_formulario.cleaned_data
+            servicio.servicio = informacion['servicio']
+            servicio.precio = informacion['precio']
+
+            servicio.save()
+
+            servicios = Servicio.objects.all() 
+            contexto = {'servicios': servicios}
+
+            return render(request, 'AppBeautyStudio/leer-servicios.html', contexto)
+    
+    else:
+        mi_formulario = ServicioFormulario(initial={'servicio':servicio.servicio, 'precio':servicio.precio})
+
+        servicios = Servicio.objects.all()
+        contexto = {'mi_formulario':mi_formulario, 'servicio_id':servicio_id}
+
+        return render(request, 'AppBeautyStudio/editar-servicios.html', contexto)
+
+
+

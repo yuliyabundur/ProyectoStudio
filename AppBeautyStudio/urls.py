@@ -15,4 +15,6 @@ urlpatterns = [
     #path('busqueda-especialista/', busqueda_especialista, name='busqueda-especialista'),
     path('buscar/', buscar, name='buscar'),
     path('leer-servicios/', leer_servicios, name='leer-servicios'),
+    path('eliminar-servicios/<servicio_id>', eliminar_servicio, name='eliminar-servicios'),
+    path('editar-servicios/<servicio_id>', editar_servicio, name='editar-servicios'),
 ]
