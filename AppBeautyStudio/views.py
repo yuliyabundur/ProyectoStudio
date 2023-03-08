@@ -4,12 +4,13 @@ from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 
 
+
 from .models import Especialista, Servicio, Cliente, Cita
-from .forms import EspecialistaFormulario, ServicioFormulario, ClienteFormulario, CitaFormulario
+from .forms import EspecialistaFormulario, ServicioFormulario, ClienteFormulario, CitaFormulario, MyUserCreationForm
 
 class EspecialistaList(ListView):
 
@@ -243,7 +244,23 @@ def login_request(request):
                 return render(request, 'AppBeautyStudio/login.html', contexto)
     contexto = {'form':form}
     return render(request, 'AppBeautyStudio/login.html', contexto)
-       
+
+def register(request):
+    if request.method == 'POST':
+        #form = UserCreationForm(request.POST)
+        form = MyUserCreationForm(request.POST)
+
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            form.save()
+            contexto = {'mensaje': 'Usuario creado satisfactoriamente'}
+            return render(request, 'AppBeautyStudio/login.html', contexto)
+
+    else:
+        #form = UserCreationForm()
+        form = MyUserCreationForm()
+        contexto = {'form': form}
+        return render(request, 'AppBeautyStudio/register.html', contexto)
 
 
 

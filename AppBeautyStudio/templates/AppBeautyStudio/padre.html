@@ -21,12 +21,12 @@
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
                 <a class="navbar-brand" href="{% url 'inicio' %}">Beauty Studio 3.14</a>
-                <button type="button" class="btn btn-outline-inicio">Inicio</button>
+                <a class="btn btn-outline-login" href="{% url 'login' %}">Login</a>
                 <a href="{% url 'especialistas' %}">Especialistas</a>
                 <a href="{% url 'leer-servicios' %}">Servicios</a>
                 <a href="{% url 'clientes' %}">Clientes</a>
                 <a href="{% url 'pedir-cita-formulario' %}">Pedir Cita</a>
-                <button type="button" class="btn btn-outline-buscar">Buscar</button>
+                <a class="btn btn-outline-logout" href="{% url 'logout' %}">Logout</a>
             </div>
         </nav>
         <!-- Masthead-->
