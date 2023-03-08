@@ -1,9 +1,45 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.views.generic import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse, reverse_lazy
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, logout, authenticate
+
 
 from .models import Especialista, Servicio, Cliente, Cita
 from .forms import EspecialistaFormulario, ServicioFormulario, ClienteFormulario, CitaFormulario
 
+class EspecialistaList(ListView):
+
+    model = Especialista
+    template_name = 'AppBeautyStudio/especialistas-list.html'
+
+class EspecialistaDetail(DetailView):
+
+    model = Especialista
+    template_name = 'AppBeautyStudio/especialistas-detalle.html'
+
+class EspecialistaCreacion(CreateView):
+
+    model = Especialista
+    template_name = 'AppBeautyStudio/especialistas-nuevo.html'
+    success_url = reverse_lazy('inicio')
+    fields = ['nombre', 'apellidos', 'profesion']
+
+class EspecialistaUpdate(UpdateView):
+
+    model = Especialista
+    template_name = 'AppBeautyStudio/especialistas-nuevo.html'
+    success_url = reverse_lazy('inicio')
+    fields = ['nombre', 'apellidos', 'profesion']
+
+class EspecialistaDelete(DeleteView):
+
+    model = Especialista
+    template_name = 'AppBeautyStudio/especialistas-eliminar.html'
+    success_url = reverse_lazy('inicio')
 
 #from AppBeautyStudio.models import Especialistas
 
@@ -182,6 +218,32 @@ def editar_servicio(request, servicio_id):
         contexto = {'mi_formulario':mi_formulario, 'servicio_id':servicio_id}
 
         return render(request, 'AppBeautyStudio/editar-servicios.html', contexto)
+    
+def login_request(request):
+    form = AuthenticationForm()
+
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+
+        if form.is_valid():
+            usuario = form.cleaned_data.get('username')
+            contrasenia = form.cleaned_data.get('password')
+
+            user = authenticate(username=usuario, password=contrasenia)
+
+            if user is not None:
+                login(request, user)
+                contexto = {'mensaje': f'Bienvenid@ {usuario}'}
+                return render(request, 'AppBeautyStudio/especialistas.html', contexto)
+            else:
+                contexto = {'mensaje': f'El usuario no existe', 'form':form}
+                return render(request, 'AppBeautyStudio/login.html', contexto)
+        else:
+                contexto = {'mensaje': f'datos incorrectos', 'form':form}
+                return render(request, 'AppBeautyStudio/login.html', contexto)
+    contexto = {'form':form}
+    return render(request, 'AppBeautyStudio/login.html', contexto)
+       
 
 
 

@@ -1,0 +1,21 @@
+{% extends 'AppBeautyStudio/padre.html' %}
+
+{% block contenido %}
+<section class="mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Eliminar Especialistas</h1>
+                <form method="POST">
+                {% csrf_token %}
+                <p>Seguro que quiere eliminar el Especialista {{ object }}?</p>
+
+                <input type="submit" value="Eliminar">
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock contenido %}
