@@ -6,13 +6,15 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 
 
 from .models import Especialista, Servicio, Cliente, Cita
 from .forms import EspecialistaFormulario, ServicioFormulario, ClienteFormulario, CitaFormulario, MyUserCreationForm
 
-class EspecialistaList(ListView):
+class EspecialistaList(LoginRequiredMixin, ListView):
 
     model = Especialista
     template_name = 'AppBeautyStudio/especialistas-list.html'
@@ -26,7 +28,7 @@ class EspecialistaCreacion(CreateView):
 
     model = Especialista
     template_name = 'AppBeautyStudio/especialistas-nuevo.html'
-    success_url = reverse_lazy('inicio')
+    success_url = reverse_lazy('especialistas')
     fields = ['nombre', 'apellidos', 'profesion']
 
 class EspecialistaUpdate(UpdateView):
@@ -49,7 +51,7 @@ def inicio(request):
     return render(request,'AppBeautyStudio/Inicio.html')
 
 def especialistas(request):
-    #return render(request,'AppBeautyStudio/Especialistas.html')
+    return render(request,'AppBeautyStudio/especialistas-list.html')
     mis_especialistas = Especialista.objects.all()
 
     if request.method == 'POST':
@@ -83,10 +85,10 @@ def pedir_cita(request):
 
 def especialistas_formulario(request):
 
-    #if request.method == 'POST':
-    #   nuevo_especialista = Especialista(nombre=request.POST['nombre'], apellidos=request.POST['apellidos'], profesion=request.POST['profesion'])
-    #   nuevo_especialista.save()
-    #   return redirect('especialistas-formulario')
+    if request.method == 'POST':
+       nuevo_especialista = Especialista(nombre=request.POST['nombre'], apellidos=request.POST['apellidos'], profesion=request.POST['profesion'])
+       nuevo_especialista.save()
+       return redirect('especialistas-formulario')
 
     if request.method == 'POST':
         mi_formulario = EspecialistaFormulario(request.POST)
@@ -157,8 +159,8 @@ def citas_formulario(request):
     mi_formulario = CitaFormulario ()
     return render(request, 'AppBeautyStudio/citas-formulario.html',{'formulario_citas': mi_formulario})
 
-def busqueda_especialista(request):
-    return render(request,'AppBeautyStudio/busqueda-especialista.html')
+#def busqueda_especialista(request):
+    #return render(request,'AppBeautyStudio/busqueda-especialista.html')
 
 def buscar(request):
     
@@ -235,7 +237,7 @@ def login_request(request):
             if user is not None:
                 login(request, user)
                 contexto = {'mensaje': f'Bienvenid@ {usuario}'}
-                return render(request, 'AppBeautyStudio/especialistas.html', contexto)
+                return render(request, 'AppBeautyStudio/inicio.html', contexto)
             else:
                 contexto = {'mensaje': f'El usuario no existe', 'form':form}
                 return render(request, 'AppBeautyStudio/login.html', contexto)
