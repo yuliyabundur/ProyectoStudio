@@ -34,3 +34,15 @@ class MyUserCreationForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
         help_texts = {k: '' for k in fields}
+
+class UserEditForm(UserCreationForm):
+    username = forms.CharField(label='Nombre de Usuario')
+    email = forms.EmailField(label='Email')
+    first_name = forms.CharField(label='Nombre')
+    last_name = forms.CharField(label='Apellido')
+
+    class Meta():
+        model = User
+        fields = ['username', 'email', 'first_name', 'last_name']
+        help_texts = {k: '' for k in fields}
+

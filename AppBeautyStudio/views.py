@@ -8,12 +8,13 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 
 
 
 from .models import Especialista, Servicio, Cliente, Cita
-from .forms import EspecialistaFormulario, ServicioFormulario, ClienteFormulario, CitaFormulario, MyUserCreationForm
+from .forms import EspecialistaFormulario, ServicioFormulario, ClienteFormulario, CitaFormulario, MyUserCreationForm, UserCreationForm, UserEditForm
 
 class EspecialistaList(LoginRequiredMixin, ListView):
 
@@ -269,6 +270,15 @@ def register(request):
         form = MyUserCreationForm()
         contexto = {'form': form}
         return render(request, 'AppBeautyStudio/register.html', contexto)
+    
+@login_required()
+def editar_perfil(request):
+    usuario = User.objects.get(username=request.user)
+
+    mi_formulario = UserEditForm(initial={'username':usuario.username, 'email':usuario.email, 'last_name':usuario.last_name, 'first_name':usuario.first_name})
+
+    return render(request, 'AppBeautyStudio/editar-perfil.html', {'mi_formulario': mi_formulario})  
+
 
 
 
