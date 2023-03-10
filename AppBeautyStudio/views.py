@@ -7,6 +7,7 @@ from django.urls import reverse, reverse_lazy
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -74,6 +75,7 @@ def especialistas(request):
 
     return render(request, 'AppBeautyStudio/Especialistas.html', {'formulario_especialistas':mi_formulario, 'mis_especialistas':mis_especialistas})
 
+@login_required()
 def servicios(request):
     return render(request,'AppBeautyStudio/Servicios.html')
 
