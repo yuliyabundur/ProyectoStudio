@@ -104,6 +104,7 @@ def especialistas_formulario(request):
     mi_formulario = EspecialistaFormulario 
     return render(request, 'AppBeautyStudio/Especialistas-formulario.html',{'formulario_especialistas': mi_formulario})
 
+@login_required()
 def servicios_formulario(request):
 
     #if request.method == 'POST':
@@ -176,11 +177,13 @@ def buscar(request):
         respuesta = 'No se encontró este especialista'
     return HttpResponse(respuesta)
 
+@login_required()
 def leer_servicios(request):
     servicios = Servicio.objects.all() #trae todos los servicios
     contexto = {'servicios': servicios}
     return render(request, 'AppBeautyStudio/leer-servicios.html', contexto)
 
+@login_required()
 def eliminar_servicio(request, servicio_id):
     servicio= Servicio.objects.get(id=servicio_id)
     servicio.delete()
@@ -192,6 +195,7 @@ def eliminar_servicio(request, servicio_id):
 
     return render(request, 'AppBeautyStudio/leer-servicios.html', contexto)
 
+@login_required()
 def editar_servicio(request, servicio_id):
     servicio= Servicio.objects.get(id=servicio_id)
 
