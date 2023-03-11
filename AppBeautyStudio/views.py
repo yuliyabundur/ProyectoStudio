@@ -275,7 +275,23 @@ def register(request):
 def editar_perfil(request):
     usuario = User.objects.get(username=request.user)
 
-    mi_formulario = UserEditForm(initial={'username':usuario.username, 'email':usuario.email, 'last_name':usuario.last_name, 'first_name':usuario.first_name})
+    if request.method =='POST':
+        mi_formulario = UserEditForm(request.POST)
+
+        if mi_formulario.is_valid():
+            informacion = mi_formulario.cleaned_data
+
+            usuario.username = informacion['username']
+            usuario.email = informacion['email']
+            usuario.first_name = informacion['first_name']
+            usuario.last_name = informacion['last_name']
+
+            usuario.save()
+
+            return redirect('/')
+
+    else:
+        mi_formulario = UserEditForm(initial={'username':usuario.username, 'email':usuario.email, 'last_name':usuario.last_name, 'first_name':usuario.first_name})
 
     return render(request, 'AppBeautyStudio/editar-perfil.html', {'mi_formulario': mi_formulario})  
 

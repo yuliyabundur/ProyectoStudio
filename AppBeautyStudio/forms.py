@@ -35,7 +35,7 @@ class MyUserCreationForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
         help_texts = {k: '' for k in fields}
 
-class UserEditForm(UserCreationForm):
+class UserEditForm(forms.Form):
     username = forms.CharField(label='Nombre de Usuario')
     email = forms.EmailField(label='Email')
     first_name = forms.CharField(label='Nombre')
