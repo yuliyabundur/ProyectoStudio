@@ -39,12 +39,11 @@ class Cita(models.Model):
         return self.fecha_cita
     
 class Avatar(models.Model):
-    #vinculo con el perfil del usuario
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    #subcarpeta avatares
-    imagen = models.ImageField(upload_to='avatares', null=True, blank=True, default='blank.jpg')
+    imagen = models.ImageField(upload_to='avatar', null=True, blank=True, default='blank.jpg')
 
     def __str__(self):
-        self.user.username
+        return self.user.username
     
    
