@@ -40,7 +40,7 @@ class Cita(models.Model):
     
 class Avatar(models.Model):
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     imagen = models.ImageField(upload_to='avatar', null=True, blank=True, default='blank.jpg')
 
     def __str__(self):

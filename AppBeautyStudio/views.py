@@ -263,12 +263,14 @@ def register(request):
             username = form.cleaned_data['username']
             form.save()
             contexto = {'mensaje': 'Usuario creado satisfactoriamente'}
+            
             return render(request, 'AppBeautyStudio/login.html', contexto)
 
     else:
         #form = UserCreationForm()
         form = MyUserCreationForm()
         contexto = {'form': form}
+
         return render(request, 'AppBeautyStudio/register.html', contexto)
     
 @login_required()
