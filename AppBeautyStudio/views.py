@@ -8,13 +8,14 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User 
+
 
 
 
 
 from .models import Especialista, Servicio, Cliente, Cita
-from .forms import EspecialistaFormulario, ServicioFormulario, ClienteFormulario, CitaFormulario, MyUserCreationForm, UserCreationForm, UserEditForm
+from .forms import EspecialistaFormulario, ServicioFormulario, ClienteFormulario, CitaFormulario, MyUserCreationForm, UserCreationForm, UserEditForm, AvatarFormulario
 
 class EspecialistaList(LoginRequiredMixin, ListView):
 
@@ -263,7 +264,7 @@ def register(request):
             username = form.cleaned_data['username']
             form.save()
             contexto = {'mensaje': 'Usuario creado satisfactoriamente'}
-            
+
             return render(request, 'AppBeautyStudio/login.html', contexto)
 
     else:
@@ -295,7 +296,24 @@ def editar_perfil(request):
     else:
         mi_formulario = UserEditForm(initial={'username':usuario.username, 'email':usuario.email, 'last_name':usuario.last_name, 'first_name':usuario.first_name})
 
-    return render(request, 'AppBeautyStudio/editar-perfil.html', {'mi_formulario': mi_formulario})  
+    return render(request, 'AppBeautyStudio/editar-perfil.html', {'mi_formulario': mi_formulario}) 
+
+@login_required
+def editar_avatar(request):
+    avatar = request.user.avatar
+    mi_formulario = AvatarFormulario(instance=avatar)
+
+    if request.method == 'POST':
+        mi_formulario = AvatarFormulario(request.POST, request.FILES, instance=avatar)
+        if mi_formulario.is_valid():
+            mi_formulario.save()
+            return redirect('/')
+        
+    else:
+
+        return render(request, 'AppBeautyStudio/editar-avatar.html', {'mi_formulario':mi_formulario})
+
+
 
 
 
