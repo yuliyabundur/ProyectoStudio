@@ -121,7 +121,7 @@ def servicios_formulario(request):
             informacion = mi_formulario.cleaned_data
             nuevo_servicio = Servicio(servicio=informacion['servicio'], precio=informacion['precio'])
             nuevo_servicio.save()
-            return redirect('servicios-formulario')
+            return redirect('leer-servicios')
 
     mi_formulario = ServicioFormulario
     return render(request, 'AppBeautyStudio/Servicios-formulario.html',{'formulario_servicios': mi_formulario})
