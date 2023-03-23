@@ -37,7 +37,7 @@ class EspecialistaCreacion(CreateView):
 class EspecialistaUpdate(UpdateView):
 
     model = Especialista
-    template_name = 'AppBeautyStudio/especialistas-nuevo.html'
+    template_name = 'AppBeautyStudio/especialistas-editar.html'
     success_url = reverse_lazy('inicio')
     fields = ['nombre', 'apellidos', 'profesion']
 
@@ -55,6 +55,9 @@ def inicio(request):
 
 def especialistas(request):
     return render(request,'AppBeautyStudio/especialistas-list.html')
+
+def especialistas_detalle(request):
+    return render(request,'AppBeautyStudio/especialistas-detalle.html')
     mis_especialistas = Especialista.objects.all()
 
     if request.method == 'POST':
