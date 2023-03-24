@@ -303,8 +303,7 @@ def editar_perfil(request):
 def editar_avatar(request):
     avatar = request.user.avatar
     mi_formulario = AvatarFormulario(instance=avatar)
-    # PUTITA # PUTITA # PUTITA # PUTITA # PUTITA # PUTITA
-    # PUTITA # PUTITA # PUTITA # PUTITA # PUTITA # PUTITA
+   
     if request.method == 'POST':
         mi_formulario = AvatarFormulario(request.POST, request.FILES, instance=avatar)
         if mi_formulario.is_valid():

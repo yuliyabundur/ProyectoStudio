@@ -9,4 +9,7 @@
 # para registrarse - http://127.0.0.1:8000/register/ 
 # login - http://127.0.0.1:8000/login/
 # logout -http://127.0.0.1:8000/logout
+# editar perfil - http://127.0.0.1:8000/editar-perfil/
+# editar avatar - http://127.0.0.1:8000/editar-avatar/
+
 
