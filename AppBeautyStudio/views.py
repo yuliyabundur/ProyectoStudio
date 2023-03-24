@@ -267,15 +267,13 @@ def register(request):
             username = form.cleaned_data['username']
             form.save()
             contexto = {'mensaje': 'Usuario creado satisfactoriamente'}
-
             return render(request, 'AppBeautyStudio/login.html', contexto)
 
     else:
         #form = UserCreationForm()
         form = MyUserCreationForm()
-        contexto = {'form': form}
-
-        return render(request, 'AppBeautyStudio/register.html', contexto)
+    contexto = {'form': form}
+    return render(request, 'AppBeautyStudio/register.html', contexto)
     
 @login_required()
 def editar_perfil(request):
@@ -305,7 +303,8 @@ def editar_perfil(request):
 def editar_avatar(request):
     avatar = request.user.avatar
     mi_formulario = AvatarFormulario(instance=avatar)
-
+    # PUTITA # PUTITA # PUTITA # PUTITA # PUTITA # PUTITA
+    # PUTITA # PUTITA # PUTITA # PUTITA # PUTITA # PUTITA
     if request.method == 'POST':
         mi_formulario = AvatarFormulario(request.POST, request.FILES, instance=avatar)
         if mi_formulario.is_valid():
